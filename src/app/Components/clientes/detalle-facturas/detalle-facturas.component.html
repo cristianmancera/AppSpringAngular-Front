@@ -1,0 +1,57 @@
+<div class="card" *ngIf="factura">
+    <div class="card-header">{{titulo}}: {{factura.descripcion}}</div>
+    <div class="card-body">
+        <h4 class="card-title">
+            <a [routerLink]="['/clientes']" class="bt btn-light btn-xs">&laquo; volver</a>
+        </h4>
+
+        <ul class="list-group m-3">
+            <li class="list-group-item list-group-item-primary">Datos del cliente</li>
+            <li class="list-group-item">{{factura.cliente.nombre}}</li>
+            <li class="list-group-item">{{factura.cliente.apellido}}</li>
+
+        </ul>
+        <ul class="list-group m-3">
+            <li class="list-group-item list-group-item-primary">Datos de la factura</li>
+            <li class="list-group-item">ID: {{factura.id}}</li>
+            <li class="list-group-item">Descripcion: {{factura.descripcion}}</li>
+            <li class="list-group-item">Fecha: {{factura.createAt}}</li>
+        </ul>
+
+        <table class="talbe table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of factura.items">
+                    <td>{{item.producto}}</td>
+                    <td>{{item.producto}}</td>
+                    <td>{{item.cantidad}}</td>
+                    <td>{{item.importe}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h5 class="float-right" *ngIf="factura.total>0">
+            <span>Gran Total</span>: <span>{{factura.total}}</span>
+        </h5>
+        <div class="card border-info mb-4" style="max-width: 350px;">
+            <div class="card-header">
+                Observaciones
+            </div>
+            <div class="card-body">
+                <p *ngIf="factura.observacion; else noObserv">{{factura.observacion}}</p>
+                <ng-template #noObserv>
+                    <p>
+                        
+                        No tiene observacion
+                    </p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
